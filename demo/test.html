@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script src='js/jquery.min.js'></script>
+    <script src='../wterm.jquery.js'></script>
+    <link rel="stylesheet" href="./css/wterm.css" type="text/css" />
+
+
+    <script>
+      $( document ).ready( function() {
+        $('#wterm').wterm();
+      });
+
+      $.register_command( 'noof', function() { return 'phony' } );
+      $.register_command( 'boom', '/demo/boom.php' );
+    </script>
+    <title> Wterm - Demo </title>
+  </head>
+  <body>
+
+    <div id='wterm'>
+    </div>
+
+  </body>
+</html>
+

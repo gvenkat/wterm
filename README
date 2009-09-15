@@ -1,0 +1,100 @@
+WTerm
+
+ABOUT
+
+WTerm is a web-based terminal emulator plugin for JQuery. JQuery is a powerful 
+javascript library that helps write compact, easy to read code. JQuery is also
+compaitable with most browsers in wide use today. To Learn more about JQuery
+please see:
+
+http://www.jquery.com
+
+WTerm is simple plugin to emulate terminal on the browser. To start using 
+this plugin the simplest thing to do is:
+
+
+  $( document ).ready( function() { $('#terminal').webterm() } )
+
+
+By Default WTerm comes with just one command. 'clear' clears the screen.
+To register new commands you simple register a command like this:
+
+  $.register_command( 'command_name', function( tokens ) { return 'this is what i did' } );
+
+tokens are passed to your function, its an array of the entire command
+broken into tokens. Tokens are assumed to be seperated by whitespace. The token seperator
+is not configurable. For Example:
+
+  $ moo boo whoo
+
+creates a structure:
+
+  new Array( 'moo', 'boo', 'whoo')
+
+and passes this to your function.
+
+
+If you want the command to be run on the server and the response to be 
+published on your web terminal, you simply pass URL in place of a function
+
+  $.register_command( 'command_from_server', '/i/me/mine.php' );
+  $.register_command( 'command_from_server', 'http://www.yourdomain.com/i/me/mine.php' );
+
+
+
+WTERM
+
+WTerm is highly configurable, you can configure various parts of the terminal, wherever possible
+WTerm uses sensible defaults. To Configure WTerm you will need to pass a singleton object at 
+initialization state:
+
+  $( '#terminal' ).wterm(  { key: 'value', ... } );
+
+
+The Following list documents the configurable properties of the terminal
+
+PS1                 - Primary Prompt ( Defaults to 'wterm $' )
+TERMINAL_CLASS      - Class name that apply to terminal Container ( Defaults to 'wterm_terminal' )
+PROMPT_CLASS        - Class name that apply to prompt ( Defaults to 'wterm_prompt' )
+THEME_CLASS_PREFIX  - Theme Class Name that will be prefixed to themes for example theme 'subbeam' will
+                    - automatically become 'prefix_subbeam'
+DEFAULT_THEME       - Default Theme Class Name defaults to 'green_on_black'
+HIGHLIGHT_CLASS     - Class name to apply to highlighted text
+KEYWORD_CLASS       - Class name to apply to keywords
+WIDTH               - Width for container
+HEIGHT              - Height for container
+WELCOME_MESSAGE     - Default Welcome Message to show when the terminal is first initialized
+NOT_FOUND           - Message to show when a command is not found
+                    - 'CMD' in this string will automatically be 
+                    - translated to command user typed in
+HELP                - Help not finalized
+AUTOCOMPLETE        - Boolen, Autocomplete enabled/disabled ( By Default Enabled )
+HISTORY             - Boolen, History enabled/disabled ( By Default Enabled ) 
+AJAX_METHOD         - HTTP Method to call must be GET/POST ( Defaults to GET )
+AJAX_PARAM          - Parameter to send the command in for HTTP request ( Default to tokens )
+
+
+So to disable Auto Complete you will do:
+
+  $( '#terminal' ).wterm( { AUTOCOMPLETE: false, HISTORY: false } );
+
+To Send POST instead of GET and to customize request param you will do:
+
+  $( '#terminal' ).wterm( { AJAX_METHOD: 'POST', AJAX_PARAM: 'command' } );
+
+
+REGISTER COMMAND
+
+
+
+
+
+
+
+
+
+
+
+
+
+
