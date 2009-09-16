@@ -1,16 +1,7 @@
-
-// TODO: Crash Test this         - IE7 FF2 FF3 IE8 Safari
-// TODO: Refactor the code       - * * *
-// TODO: Get it code reviewed
-// TODO: Comment the Code        - *
-// TODO: Prompt Customization
-// TODO: Write User Manual
-// TODO: Put it on appspot
-
 /**
  * @Author :        venkatakrishnan ganesh
  * @file   :        wterm.jquery.js
- * @email  :        superpulse DOT x AT [ 'l', 'i', 'a', 'm', 'g' ].reverse().join('') + '.com'
+ * @url    :        http://wterminal.appspot.com
  * @desc   :
  *
  * Allows Emulation of Terminal on the browser.
@@ -23,7 +14,7 @@
 ( function( $ ) {
 
    
-  var VERSION = '0.0.3';
+  var VERSION = '0.0.4';
 
   /**
   *
