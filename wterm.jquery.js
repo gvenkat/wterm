@@ -63,7 +63,7 @@
       // WELCOME_MESSAGE
       // Message to be shown when the terminal is first 
       // published
-      WELCOME_MESSAGE    : '<div>Welcome to Wterm version-' + VERSION + '. To begin type <span> help </span></div>',
+      WELCOME_MESSAGE    : '<div>Welcome to Wterm version-' + VERSION + '.</div>',
 
       // NOT_FOUND
       // Message to be published if the command is not found
