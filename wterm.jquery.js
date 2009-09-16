@@ -79,10 +79,6 @@
       // Note: "CMD" will be replaced with the actual command
       NOT_FOUND          : '<div> CMD: Command Not Found </div>',
 
-      // HELP
-      // Help Message
-      HELP               : 'Some Help Message',
-
       // AUTOCOMPLETE
       // Is Autocomplete feature Enabled
       // Please see the manual on how AUTOCOMPLETE is implemented
@@ -104,7 +100,11 @@
 
       // AJAX_PARAMETER
       // The GET/POST parameter that should be used to make requests
-      AJAX_PARAM      : 'tokens'
+      AJAX_PARAM      : 'tokens',
+
+      // ERROR_PREFIX
+      // Prefix For Error Messages
+      ERROR_PREFIX    : 'An Error Occured: '
 
     };
   };
@@ -199,11 +199,7 @@
       * @args     : current_prompt, command, data
       **/
       var update_content = function( p, cmd, data ) {
-        // Crap!
-        content.append( '<div><span>' + p + ' ' + cmd + '</span><div>' )
-        if( data ) content.append( data );
-        content.append( '</div></div>' );
-                        
+        content.append( '<div><span>' + p + ' ' + cmd + '</span><div>' + ( ( data ) ? data : '' ) + '</div></div>' );
       }; 
 
       /**
@@ -259,7 +255,7 @@
 
             }
           } catch( e ) {
-            update_content( settings.PS1, value, 'An Error Occured: ' + e.message );
+            update_content( settings.PS1, value, settings.ERROR_PREFIX + e.message );
           }
           show();
         } else if( tokens[0] == '' ){
