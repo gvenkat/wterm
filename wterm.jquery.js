@@ -54,6 +54,10 @@
       // The Class that is applied to keywords
       KEYWORD_CLASS      : 'wterm_keyword',
 
+      // CONTENT_CLASS 
+      // The Class that is applied to content section 
+      KEYWORD_CLASS      : 'wterm_content',
+
       // WIDTH | HIGHT
       // Explicitly set width and height of the terminal
       // container. This may also be done in TERMINAL_CLASS
@@ -63,7 +67,7 @@
       // WELCOME_MESSAGE
       // Message to be shown when the terminal is first 
       // published
-      WELCOME_MESSAGE    : '<div>Welcome to Wterm version-' + VERSION + '.</div>',
+      WELCOME_MESSAGE    : 'Welcome to Wterm version-' + VERSION ,
 
       // NOT_FOUND
       // Message to be published if the command is not found
@@ -144,18 +148,18 @@
       // required for terminal emulation
       element.addClass( settings.TERMINAL_CLASS ).addClass( settings.THEME_CLASS_PREFIX + settings.DEFAULT_THEME );
       if( settings.WIDTH && settings.HEIGHT ) element.css( { width: settings.WIDTH, height: settings.HEIGHT } )
-      element.html( '' ).append( settings.WELCOME_MESSAGE );
+      element.html( '' ).append( '<div>' + settings.WELCOME_MESSAGE + '</div>' );
 
       element.append( '<div class="' + settings.CONTENT_CLASS + '"></div>' );
-      element.append( '<span class="' + settings.PROMPT_CLASS + '">' + settings.PS1 +
-                      '<form> <input type="text" ></form></span>' ); 
+      element.append( '<div><span class="' + settings.PROMPT_CLASS + '">' + settings.PS1 + '&nbsp;</span>' +
+                      '<form> <input type="text" ></form></div>' ); 
 
 
       // Representing prompt, form, input and content section 
       // in the terminal
-      var _prompt    = element.find( 'span:last' );
-      var input_form = element.find( 'span:last form' );
-      var input      = element.find( 'span:last form input' );
+      var _prompt    = element.find( 'div:last span:last' );
+      var input_form = element.find( 'div:last form' );
+      var input      = element.find( 'div:last form input' );
       var content    = element.find( '.' + settings.CONTENT_CLASS );
       
 
