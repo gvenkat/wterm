@@ -8,6 +8,12 @@
       body { background: #000; font-size: 1.3em;  }
     </style>
 
+    <script>
+      String.prototype.reverse = function() {
+        return this.split('').reverse().join('');
+      };
+    </script>
+
 
     <script>
       $( document ).ready( function() {
@@ -43,6 +49,22 @@
         'go': function( tokens ) {
            var url = tokens[1];
            document.location.href = url;
+         },
+ 
+         'strrev': {
+           PS1: 'strrev $',
+ 
+           START_HOOK: function() {
+             return 'begin interface commands';
+           },
+
+           EXIT_HOOK: function() {
+             return 'exit interface commands';
+           },
+ 
+           DISPATCH: function( tokens ) {
+             return tokens.join('').reverse();
+           }
          }
       };
 
