@@ -54,11 +54,11 @@
          'strrev': {
            PS1: 'strrev $',
  
-           START_HOOK: function() {
-             return 'begin interface commands';
+           EXIT_HOOK: function() {
+             return 'exit interface commands';
            },
 
-           EXIT_HOOK: function() {
+           START_HOOK: function() {
              return 'exit interface commands';
            },
  

@@ -279,14 +279,18 @@
         };
 
         if( key == '' ) {
-          update_content( ( cdispatch && cdispatch.PS1 ) ? cdispatch.PS1 : settings.PS1 , '' )
+          update_content( get_current_prompt() , '' )
         } else if( cdispatch && key == 'exit' ) {
            
            // Recover old configuration and Dispatch exit hook
            settings.AUTOCOMPLETE = ( ac_save ) ? ac_save : false ;
 
            // Todo: test what happens when exit hook is not defined
-           _dispatch( cdispatch.EXIT_HOOK, tokens );
+           if( cdispatch.EXIT_HOOK ) {
+             _dispatch( cdispatch.EXIT_HOOK, tokens );
+           } else {
+             _dispatch( function() { return '<b></b>' }, tokens );
+           }
        
           // Clear temporary values
           cdispatch = null;  
@@ -310,7 +314,12 @@
             settings.AUTOCOMPLETE = false;
 
             // Todo:See what happens if start hook is not defined
-            _dispatch( cdispatch.START_HOOK, tokens );
+            if( cdispatch.START_HOOK ) {
+              _dispatch( cdispatch.START_HOOK, tokens );
+            } else {
+              // A stupid Hack
+              _dispatch( function() { return '<b></b>' }, tokens );
+            }
           } else {
             _dispatch( dispatch[ key ], tokens );
           } 
