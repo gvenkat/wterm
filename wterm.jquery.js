@@ -167,6 +167,9 @@
 
       // Temprary storage for autocomplete configuration
       var ac_save    = null;
+
+      // Temporary store for current prompt
+      var cprompt    = null;
       
       // Curson always needs to be on the prompt
       input.focus();
@@ -255,7 +258,7 @@
         hide(); 
 
         var get_current_prompt = function() {
-          return ( cdispatch && cdispatch.PS1 ) ? cdispatch.PS1 : settings.PS1;
+          return ( cprompt ) ? cprompt : settings.PS1;
         }
 
         var _dispatch = function( key, tokens ) {
@@ -278,20 +281,35 @@
         if( key == '' ) {
           update_content( ( cdispatch && cdispatch.PS1 ) ? cdispatch.PS1 : settings.PS1 , '' )
         } else if( cdispatch && key == 'exit' ) {
+           
+           // Recover old configuration and Dispatch exit hook
            settings.AUTOCOMPLETE = ( ac_save ) ? ac_save : false ;
-          _dispatch( cdispatch.EXIT_HOOK, tokens );
+
+           // Todo: test what happens when exit hook is not defined
+           _dispatch( cdispatch.EXIT_HOOK, tokens );
+       
+          // Clear temporary values
           cdispatch = null;  
+          cprompt   = null;
+
+          // Reset the prompt
           set_prompt( settings.PS1 );
+
         } else if( cdispatch ) {
+
+          // Dispatch to the custom dispatcher
           _dispatch( cdispatch.DISPATCH, tokens ); 
+
         } else if( dispatch[ key ] ) {
           if( typeof dispatch[ key ] === 'object' ) {
             cdispatch = dispatch[ key ];
-            set_prompt( cdispatch.PS1 || settings.PS1 );
+            cprompt   = cdispatch.PS1 || key;
+            set_prompt( cprompt );
 
             ac_save = settings.AUTOCOMPLETE;
             settings.AUTOCOMPLETE = false;
 
+            // Todo:See what happens if start hook is not defined
             _dispatch( cdispatch.START_HOOK, tokens );
           } else {
             _dispatch( dispatch[ key ], tokens );
