@@ -274,7 +274,7 @@
               update_content( get_current_prompt(), value, data )
             };
            
-            $[ settings.AJAX_METHOD.toLowerCase() ]( dispatch[ key ], to_send, on_complete );
+            $[ settings.AJAX_METHOD.toLowerCase() ](  key, to_send, on_complete );
           }
         };
 
